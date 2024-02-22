@@ -59,35 +59,37 @@ public class FindElementTests {
     }
 
     @Test
-    public void findElementByCssSelector(){
-        //id - #id
+    public void findElementByCssSelectorTest() {
+        //tagName == css
+        //driver.findElement(By.tagName("h1"));
+        driver.findElement(By.cssSelector("h1"));
+        //id -> #id
+        //driver.findElement(By.id("city"));
         driver.findElement(By.cssSelector("#city"));
-        //className - .className
+        //className -> .className
+        // driver.findElement(By.className("navigation-link"));
         driver.findElement(By.cssSelector(".navigation-link"));
-
+        //any -> [attr='par']
         driver.findElement(By.cssSelector("[href='/search']"));
     }
 
     @Test
-    public void findElementByXPath(){
-        WebElement element = driver.findElement(By.xpath("//h1"));
-        System.out.println(element.getText());
-
+    public void findElementByXpath() {
+        //tagName == //tagName
+        //driver.findElement(By.tagName("h1"));
+        driver.findElement(By.xpath("//h1"));
+        //id -> //tag[@id='city']
+        //driver.findElement(By.id("city"));
         driver.findElement(By.xpath("//*[@id='city']"));
-
+        //className -> //tag[@class='class name']
+        // driver.findElement(By.className("navigation-link"));
         driver.findElement(By.xpath("//*[@class='navigation-link']"));
-
+        //any -> //*[@attr='par']
         driver.findElement(By.xpath("//*[@href='/search']"));
-
-        //поиск по тексту - полное совпадение
+        //by text
         driver.findElement(By.xpath("//*[text()='Find your car now!']"));
-
-        //поиск по тексту - частичное совпадение
-        WebElement element1 = driver.findElement(By.xpath("//*[.='Find your car now!']"));
-        System.out.println(element1.getText());
-        WebElement element2 = driver.findElement(By.xpath("//*[contains(.,'your car now!')]"));
-        System.out.println(element2.getText());
-
+        driver.findElement(By.xpath("//*[.='Find your car now!']"));
+        driver.findElement(By.xpath("//*[contains(.,'your car now!')]"));
     }
 
     @AfterMethod
