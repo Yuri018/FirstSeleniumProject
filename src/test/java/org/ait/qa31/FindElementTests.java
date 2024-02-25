@@ -1,33 +1,12 @@
 package org.ait.qa31;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.List;
 
-public class FindElementTests {
-
-    WebDriver driver;
-
-    @BeforeMethod
-    public void setUp() {
-        driver = new ChromeDriver();
-        driver.get("https://ilcarro.web.app");
-
-        //maximize browser to window size
-        driver.manage().window().maximize();
-
-        //wait for all elements on the page to load before starting test
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-
-
-    }
+public class FindElementTests extends TestBase {
 
     @Test
     public void findElementByTadName() {
@@ -90,10 +69,5 @@ public class FindElementTests {
         driver.findElement(By.xpath("//*[text()='Find your car now!']"));
         driver.findElement(By.xpath("//*[.='Find your car now!']"));
         driver.findElement(By.xpath("//*[contains(.,'your car now!')]"));
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
     }
 }
