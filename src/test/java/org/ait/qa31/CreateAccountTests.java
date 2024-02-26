@@ -2,44 +2,42 @@ package org.ait.qa31;
 
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class CreateAccountTests extends TestBase{
 
+    @BeforeMethod
+    public void ensurePrecondition(){
+        if (isElementPresent(By.cssSelector("[href='/login']"))){
+            click(By.cssSelector("[href='/logout']"));
+        }
+    }
+
     @Test
     public void createNewAccountPositiveTest(){
 
-        //click onLogin link
-        driver.findElement(By.cssSelector("[href='/register']")).click();
+        //click on Login link
+        click(By.cssSelector("[href='/register']"));
 
         //enter FirstName
-        driver.findElement(By.xpath("//*[@id='FirstName']")).click();
-        driver.findElement(By.xpath("//*[@id='FirstName']")).clear();
-        driver.findElement(By.xpath("//*[@id='FirstName']")).sendKeys("juri");
+        type(By.xpath("//*[@id='FirstName']"), "juri");
 
         //enter LastName
-        driver.findElement(By.xpath("//*[@id='LastName']")).click();
-        driver.findElement(By.xpath("//*[@id='LastName']")).clear();
-        driver.findElement(By.xpath("//*[@id='LastName']")).sendKeys("ryzhkov");
+        type(By.xpath("//*[@id='LastName']"), "ryzhkov");
 
         //enter Email
-        driver.findElement(By.xpath("//*[@id='Email']")).click();
-        driver.findElement(By.xpath("//*[@id='Email']")).clear();
-        driver.findElement(By.xpath("//*[@id='Email']")).sendKeys("juri@mail.com");
+        type(By.xpath("//*[@id='Email']"), "juri@mail.com");
 
 
         //enter password
-        driver.findElement(By.cssSelector("#Password")).click();
-        driver.findElement(By.cssSelector("#Password")).clear();
-        driver.findElement(By.cssSelector("#Password")).sendKeys("Qwerty007$");
+        type(By.cssSelector("#Password"), "Qwerty007$");
 
         //confirm password
-        driver.findElement(By.xpath("//*[@data-val-equalto-other='*.Password']")).click();
-        driver.findElement(By.xpath("//*[@data-val-equalto-other='*.Password']")).clear();
-        driver.findElement(By.xpath("//*[@data-val-equalto-other='*.Password']")).sendKeys("Qwerty007$");
+        type(By.xpath("//*[@data-val-equalto-other='*.Password']"), "Qwerty007$");
 
         //click on the Registration button
-        driver.findElement(By.xpath("//*[@name='register-button']")).click();
+        click(By.xpath("//*[@name='register-button']"));
 
         //assert Sing Out button is present
         Assert.assertTrue(isElementPresent(By.xpath("//*[@href='/logout']")));
