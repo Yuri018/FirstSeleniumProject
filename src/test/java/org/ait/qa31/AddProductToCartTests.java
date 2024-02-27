@@ -12,32 +12,29 @@ public class AddProductToCartTests extends TestBase{
 
     @BeforeMethod
     public void precondition(){
-//        if (isElementPresent(By.cssSelector("[href='/login']"))){
-//            click(By.cssSelector("[href='/logout']"));
-//        }
-        click(By.cssSelector("[href='/login']"));
-
-        type(By.xpath("//*[@id='Email']"), "juri@mail.com");
-
-        type(By.cssSelector("#Password"), "Qwerty007$");
-
-        click(By.xpath("//*[@class='button-1 login-button']"));
+        if (!isLoginLinkPresent()){
+            clickOnSingOutButton();
+        }
+        clickOnLoginLink();
+        fillLoginRegisterForm();
+        clickOnLoginButton();
     }
 
     @Test
     public void addProductToCartPositiveTest(){
 
-        //click on the product cart
-        click(By.cssSelector("[title='Show details for 14.1-inch Laptop']"));
-
-        //click Add to cart button
+        clickOnProductCartButton();
         click(By.xpath("//*[@id='add-to-cart-button-31']"));
 
         //click Shopping cart link
-        click(By.xpath("//*[@href='/cart']"));
+        clickOnShoppingCartLink();
 
         //assert Product is added to cart
         Assert.assertTrue(isAddProductToCart("14.1-inch Laptop"));
+    }
+
+    public void clickOnProductCartButton() {
+        click(By.cssSelector("[title='Show details for 14.1-inch Laptop']"));
     }
 
     public boolean isAddProductToCart(String product) {

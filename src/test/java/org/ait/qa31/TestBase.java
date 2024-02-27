@@ -54,4 +54,37 @@ public class TestBase {
             return true;
         }
     }
+
+    protected void clickOnLoginButton() {
+        click(By.xpath("//*[@class='button-1 login-button']"));
+    }
+
+    public void fillLoginRegisterForm() {
+        type(By.xpath("//*[@id='Email']"), "juri@mail.com");
+        type(By.cssSelector("#Password"), "Qwerty007$");
+    }
+
+    public void clickOnLoginLink() {
+        click(By.cssSelector("[href='/login']"));
+    }
+
+    public void clickOnSingOutButton() {
+        click(By.cssSelector("[href='/logout']"));
+    }
+
+    public void clickOnRegistrationButton() {
+        click(By.xpath("//*[@name='register-button']"));
+    }
+
+    public void clickOnShoppingCartLink() {
+        click(By.xpath("//*[@href='/cart']"));
+    }
+
+    public boolean isSignOutButtonPresent() {
+        return isElementPresent(By.cssSelector("[href='/logout']"));
+    }
+
+    public boolean isLoginLinkPresent() {
+        return isElementPresent(By.cssSelector("[href='/login']"));
+    }
 }
