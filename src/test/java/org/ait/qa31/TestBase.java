@@ -3,18 +3,20 @@ package org.ait.qa31;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 import java.time.Duration;
+import java.util.List;
 
 public class TestBase {
     static WebDriver driver;
 
-    @BeforeMethod
+    @BeforeSuite
     public void setUp() {
         driver = new ChromeDriver();
         driver.get("https://demowebshop.tricentis.com/");
@@ -28,7 +30,7 @@ public class TestBase {
         return !driver.findElements(locator).isEmpty();
     }
 
-    @AfterMethod(enabled = false)
+    @AfterSuite
     public void tearDown() {
         driver.quit();
     }
@@ -38,30 +40,29 @@ public class TestBase {
     }
 
     public void type(By locator, String text) {
-        click(locator);
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+        if (text != null) {
+            click(locator);
+            driver.findElement(locator).clear();
+            driver.findElement(locator).sendKeys(text);
+        }
     }
 
-    public boolean isAlertAppears() {
-        Alert alert = new WebDriverWait(driver, Duration.ofSeconds(15))
-                .until(ExpectedConditions.alertIsPresent());
+    public boolean isNotAllData() {
 
-        if (alert == null){
-            return false;
-        } else {
-            alert.accept();
-            return true;
-        }
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        WebElement warningMessage = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//*[@class='validation-summary-errors']")));
+
+        return warningMessage != null;
     }
 
     protected void clickOnLoginButton() {
         click(By.xpath("//*[@class='button-1 login-button']"));
     }
 
-    public void fillLoginRegisterForm() {
-        type(By.xpath("//*[@id='Email']"), "juri@mail.com");
-        type(By.cssSelector("#Password"), "Qwerty007$");
+    public void fillLoginRegisterForm(Customer customer) {
+        type(By.xpath("//*[@id='Email']"), customer.getEmail());
+        type(By.cssSelector("#Password"), customer.getPassword());
     }
 
     public void clickOnLoginLink() {
@@ -86,5 +87,30 @@ public class TestBase {
 
     public boolean isLoginLinkPresent() {
         return isElementPresent(By.cssSelector("[href='/login']"));
+    }
+
+    public void clickAddToCartButton() {
+        click(By.xpath("//*[@id='add-to-cart-button-31']"));
+    }
+
+    public void clickOnProductCartButton() {
+        click(By.cssSelector("[title='Show details for 14.1-inch Laptop']"));
+    }
+
+    public void removeProductFromCart() {
+        click(By.xpath("//*[@name='removefromcart']"));
+        click(By.xpath("//*[@name='updatecart']"));
+    }
+
+    public boolean isAddProductToCart(String product) {
+        List<WebElement> products = driver.findElements(By.xpath("//*[@class='cart-item-row']"));
+
+        for (WebElement element: products){
+            if (element.getText().contains(product)){
+                System.out.println(product);
+                return true;
+            }
+        }
+        return false;
     }
 }

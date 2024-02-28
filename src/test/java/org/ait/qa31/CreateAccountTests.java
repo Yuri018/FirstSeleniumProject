@@ -1,5 +1,6 @@
 package org.ait.qa31;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,7 +9,7 @@ public class CreateAccountTests extends TestBase{
 
     @BeforeMethod
     public void ensurePrecondition(){
-        if (isLoginLinkPresent()){
+        if (!isLoginLinkPresent()){
             clickOnSingOutButton();
         }
     }
@@ -42,9 +43,9 @@ public class CreateAccountTests extends TestBase{
     public void createExistedAccountNegativeTest(){
 
         clickOnLoginLink();
-        fillLoginRegisterForm();
+        fillLoginRegisterForm(new Customer().setEmail("juri@mail.com").setPassword("Qwerty007$"));
         clickOnRegistrationButton();
 
-        Assert.assertTrue(isAlertAppears());
+        Assert.assertTrue(isNotAllData());
     }
 }

@@ -8,7 +8,7 @@ public class LoginTests extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondition() {
-        if (isLoginLinkPresent()) {
+        if (!isLoginLinkPresent()) {
             clickOnSingOutButton();
         }
     }
@@ -17,7 +17,7 @@ public class LoginTests extends TestBase {
     public void loginPositiveTest() {
 
         clickOnLoginLink();
-        fillLoginRegisterForm();
+        fillLoginRegisterForm(new Customer().setEmail("juri@mail.com").setPassword("Qwerty007$"));
         clickOnLoginButton();
         Assert.assertTrue(isSignOutButtonPresent());
     }
@@ -26,10 +26,8 @@ public class LoginTests extends TestBase {
     public void loginNegativeTestWithOutEmail() {
 
         clickOnLoginLink();
-        fillLoginRegisterForm();
-
+        fillLoginRegisterForm(new Customer().setPassword("Qwerty007$"));
         clickOnLoginButton();
-
-        Assert.assertTrue(isAlertAppears());
+        Assert.assertTrue(isNotAllData());
     }
 }
