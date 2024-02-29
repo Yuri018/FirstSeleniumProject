@@ -1,5 +1,6 @@
 package org.ait.qa31;
 
+import org.ait.qa31.models.Customer;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,26 +9,26 @@ public class LoginTests extends TestBase {
 
     @BeforeMethod
     public void ensurePrecondition() {
-        if (!isLoginLinkPresent()) {
-            clickOnSingOutButton();
+        if (!app.getCustomer().isLoginLinkPresent()) {
+            app.getCustomer().clickOnSingOutButton();
         }
     }
 
     @Test
     public void loginPositiveTest() {
 
-        clickOnLoginLink();
-        fillLoginRegisterForm(new Customer().setEmail("juri@mail.com").setPassword("Qwerty007$"));
-        clickOnLoginButton();
-        Assert.assertTrue(isSignOutButtonPresent());
+        app.getCustomer().clickOnLoginLink();
+        app.getCustomer().fillLoginRegisterForm(new Customer().setEmail("juri@mail.com").setPassword("Qwerty007$"));
+        app.getCustomer().clickOnLoginButton();
+        Assert.assertTrue(app.getCustomer().isSignOutButtonPresent());
     }
 
     @Test
     public void loginNegativeTestWithOutEmail() {
 
-        clickOnLoginLink();
-        fillLoginRegisterForm(new Customer().setPassword("Qwerty007$"));
-        clickOnLoginButton();
-        Assert.assertTrue(isNotAllData());
+        app.getCustomer().clickOnLoginLink();
+        app.getCustomer().fillLoginRegisterForm(new Customer().setPassword("Qwerty007$"));
+        app.getCustomer().clickOnLoginButton();
+        Assert.assertTrue(app.getCustomer().isNotAllData());
     }
 }

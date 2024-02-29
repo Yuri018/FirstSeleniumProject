@@ -17,3 +17,10 @@ dependencies {
 test {
     useTestNG()
 }
+
+tasks.register('qa', Test) {
+    useTestNG()
+    if (project.hasProperty('browser')) {
+        systemProperty 'browser', "${browser}"
+    }
+}

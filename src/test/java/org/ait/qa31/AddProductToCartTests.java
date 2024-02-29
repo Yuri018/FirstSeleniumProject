@@ -1,5 +1,6 @@
 package org.ait.qa31;
 
+import org.ait.qa31.models.Customer;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -9,27 +10,27 @@ public class AddProductToCartTests extends TestBase{
 
     @BeforeMethod
     public void precondition(){
-        if (!isLoginLinkPresent()){
-            clickOnSingOutButton();
+        if (!app.getCustomer().isLoginLinkPresent()){
+            app.getCustomer().clickOnSingOutButton();
         }
-        clickOnLoginLink();
-        fillLoginRegisterForm(new Customer().setEmail("juri@mail.com").setPassword("Qwerty007$"));
-        clickOnLoginButton();
+        app.getCustomer().clickOnLoginLink();
+        app.getCustomer().fillLoginRegisterForm(new Customer().setEmail("juri@mail.com").setPassword("Qwerty007$"));
+        app.getCustomer().clickOnLoginButton();
     }
 
     @Test
     public void addProductToCartPositiveTest(){
 
-        clickOnProductCartButton();
-        clickAddToCartButton();
+        app.getProduct().clickOnProductCartButton();
+        app.getProduct().clickAddToCartButton();
 
-        clickOnShoppingCartLink();
+        app.getProduct().clickOnShoppingCartLink();
 
-        Assert.assertTrue(isAddProductToCart("14.1-inch Laptop"));
+        Assert.assertTrue(app.getProduct().isAddProductToCart("14.1-inch Laptop"));
     }
 
     @AfterMethod
     public void postCondition(){
-        removeProductFromCart();
+        app.getProduct().removeProductFromCart();
     }
 }
