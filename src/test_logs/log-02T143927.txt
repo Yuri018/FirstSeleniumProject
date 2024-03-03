@@ -1,0 +1,15 @@
+14:39:29.651 [main] INFO  org.testng.internal.Utils -- [TestNG] Running:
+  C:\Users\AIT TR Student\AppData\Local\JetBrains\IntelliJIdea2023.3\temp-testng-customsuite.xml
+
+14:39:37.467 [main] INFO  org.ait.qa31.TestBase -- Start testaddCustomerTestFromDataProvider
+14:39:41.107 [main] INFO  org.ait.qa31.TestBase -- PassedaddCustomerTestFromDataProvider
+14:39:41.107 [main] INFO  org.ait.qa31.TestBase -- Stop test
+14:39:41.108 [main] INFO  org.ait.qa31.TestBase -- _____________________________________________
+14:39:41.111 [main] INFO  org.ait.qa31.TestBase -- Start testaddCustomerTestFromDataProvider
+14:39:56.046 [main] INFO  org.ait.qa31.TestBase -- PassedaddCustomerTestFromDataProvider
+14:39:56.047 [main] INFO  org.ait.qa31.TestBase -- Stop test
+14:39:56.047 [main] INFO  org.ait.qa31.TestBase -- _____________________________________________
+14:39:56.050 [main] INFO  org.ait.qa31.TestBase -- Start testaddCustomerTestFromDataProvider
+14:40:10.679 [main] INFO  org.ait.qa31.TestBase -- PassedaddCustomerTestFromDataProvider
+14:40:10.681 [main] INFO  org.ait.qa31.TestBase -- Stop test
+14:40:10.681 [main] INFO  org.ait.qa31.TestBase -- _____________________________________________

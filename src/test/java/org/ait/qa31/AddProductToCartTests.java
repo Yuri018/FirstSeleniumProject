@@ -14,7 +14,9 @@ public class AddProductToCartTests extends TestBase{
             app.getCustomer().clickOnSingOutButton();
         }
         app.getCustomer().clickOnLoginLink();
-        app.getCustomer().fillLoginRegisterForm(new Customer().setEmail("juri@mail.com").setPassword("Qwerty007$"));
+        app.getCustomer().fillLoginRegisterForm(new Customer()
+                .setEmail("juri@mail.com")
+                .setPassword("Qwerty007$"));
         app.getCustomer().clickOnLoginButton();
     }
 
